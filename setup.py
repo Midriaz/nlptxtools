@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="nlptxtools",
-    version="0.0.4",
+    version="0.0.5",
     author="Midriaz",
     author_email="scome@inbox.ru",
     description="NLP tools for Russian language",

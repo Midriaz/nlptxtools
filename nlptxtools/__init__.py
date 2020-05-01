@@ -16,6 +16,12 @@ class TxTools:
         self.restricted_punctuation = restricted_punctuation
         self.no_lemma = no_lemma
         self.lemmatizer = lemmatizer
+        if lemmatizer == 'mystem':
+            self.morph = Mystem()
+        else:
+            self.morph = MorphAnalyzer()
+
+        self.lemmatizer = lemmatizer
 
     def transform_(self, documents, job_no, transform_results):
         transform_results[job_no] = [self.clean_text(doc) for doc in documents]
@@ -94,11 +100,9 @@ class TxTools:
     def lemma(self, word):
         if word not in self.no_lemma:
             if self.lemmatizer == 'mystem':
-                morph = Mystem()
-                return morph.lemmatize(word)[0]
+                return self.morph.lemmatize(word)[0]
             else:
-                morph = MorphAnalyzer()
-                p = morph.parse(word)[0]
+                p = self.morph.parse(word)[0]
                 return p.normal_form
         else:
             return word
